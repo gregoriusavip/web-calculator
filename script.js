@@ -15,7 +15,11 @@ function divide(a, b) {
   return a / b;
 }
 
-let leftNum, rightNum;
+let leftNum, rightNum, curOperator;
+// default to null. reset back to null after operate.
+rightNum = curOperator = null;
+// default to 0.
+leftNum = 0;
 const OPERATORS = new Map()
   .set("+", add)
   .set("-", subtract)
@@ -38,6 +42,31 @@ const buttons = document.querySelector("#buttons");
 
 buttons.addEventListener("click", (event) => {
   if (event.target.className === "number") {
-    display.textContent += event.target.textContent;
+    if (event.target.textContent === "0" && display.textContent === "0") {
+      return;
+    }
+    display.textContent === "0"
+      ? (display.textContent = event.target.textContent)
+      : (display.textContent += event.target.textContent);
+    if (curOperator === null) {
+      leftNum = display.textContent;
+    } else {
+      if (rightNum === null) {
+        display.textContent = event.target.textContent;
+      }
+      rightNum = display.textContent;
+    }
+  }
+  if (event.target.className === "operator") {
+    if (rightNum !== null) {
+      display.textContent = operate(
+        parseFloat(leftNum),
+        curOperator,
+        parseFloat(rightNum)
+      );
+      leftNum = display.textContent;
+      rightNum = null;
+    }
+    curOperator = event.target.textContent;
   }
 });
