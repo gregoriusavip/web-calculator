@@ -31,3 +31,13 @@ function operate(leftNum, operator, rightNum) {
   }
   return "ERROR, false operator";
 }
+
+//DOM Manipulation
+const display = document.querySelector("#display");
+const buttons = document.querySelector("#buttons");
+
+buttons.addEventListener("click", (event) => {
+  if (event.target.className === "number") {
+    display.textContent += event.target.textContent;
+  }
+});
