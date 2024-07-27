@@ -56,8 +56,7 @@ buttons.addEventListener("click", (event) => {
       }
       rightNum = display.textContent;
     }
-  }
-  if (event.target.className === "operator") {
+  } else if (event.target.className === "operator") {
     if (rightNum !== null) {
       display.textContent = operate(
         parseFloat(leftNum),
@@ -68,5 +67,9 @@ buttons.addEventListener("click", (event) => {
       rightNum = null;
     }
     curOperator = event.target.textContent;
+  } else if (event.target.id === "clear") {
+    leftNum = 0;
+    rightNum = curOperator = null;
+    display.textContent = 0;
   }
 });
