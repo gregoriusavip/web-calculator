@@ -46,6 +46,9 @@ const buttons = document.querySelector("#buttons");
 buttons.addEventListener("click", (event) => {
   if (event.target.className === "number") {
     if (event.target.textContent === "0" && display.textContent === "0") {
+      if (curOperator !== null) {
+        rightNum = display.textContent;
+      }
       return;
     }
     if (display.textContent === "0" || evalOp === true) {
