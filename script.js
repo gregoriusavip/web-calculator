@@ -91,7 +91,7 @@ buttons.addEventListener("click", (event) => {
   } else if (event.target.id === "clear") {
     leftNum = 0;
     rightNum = curOperator = null;
-    display.textContent = 0;
+    display.textContent = "0";
     evalOp = false;
   }
 });
