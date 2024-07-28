@@ -2,3 +2,53 @@
   margin: 0px;
   padding: 0px;
 }
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  gap: 8px;
+  border-style: solid;
+}
+
+#display {
+  height: 64px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: end;
+  border: solid;
+  margin: 3px;
+}
+
+#buttons {
+  display: flex;
+  flex-direction: column;
+  margin: 3px;
+  border: solid black 0.5px;
+}
+
+.row {
+  display: flex;
+  border: solid red 0.5px;
+  gap: 4px;
+}
+
+.row > button {
+  width: 100%;
+  height: 48px;
+}
+
+#clear {
+  flex: 3;
+}
+
+.divide {
+  flex: 1;
+}
