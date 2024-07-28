@@ -20,6 +20,7 @@ let leftNum, rightNum, curOperator;
 rightNum = curOperator = null;
 // default to 0.
 leftNum = 0;
+let evalOp = false;
 const OPERATORS = new Map()
   .set("+", add)
   .set("-", subtract)
@@ -45,9 +46,12 @@ buttons.addEventListener("click", (event) => {
     if (event.target.textContent === "0" && display.textContent === "0") {
       return;
     }
-    display.textContent === "0"
-      ? (display.textContent = event.target.textContent)
-      : (display.textContent += event.target.textContent);
+    if (display.textContent === "0" || evalOp === true) {
+      display.textContent = event.target.textContent;
+      evalOp = false;
+    } else {
+      display.textContent += event.target.textContent;
+    }
     if (curOperator === null) {
       leftNum = display.textContent;
     } else {
@@ -71,5 +75,18 @@ buttons.addEventListener("click", (event) => {
     leftNum = 0;
     rightNum = curOperator = null;
     display.textContent = 0;
+    evalOp = false;
+  } else if (event.target.id === "evaluate") {
+    if (rightNum !== null) {
+      display.textContent = operate(
+        parseFloat(leftNum),
+        curOperator,
+        parseFloat(rightNum)
+      );
+      rightNum = null;
+    }
+    curOperator = null;
+    leftNum = display.textContent;
+    evalOp = true;
   }
 });
