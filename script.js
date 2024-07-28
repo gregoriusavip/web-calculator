@@ -18,9 +18,11 @@ function divide(a, b) {
 let leftNum, rightNum, curOperator;
 // default to null. reset back to null after operate.
 rightNum = curOperator = null;
-// default to 0.
-leftNum = 0;
-let evalOp = false;
+
+leftNum = 0; // default and initial value is 0.
+
+let evalOp = false; // default and initial value is false
+
 const OPERATORS = new Map()
   .set("+", add)
   .set("-", subtract)
@@ -71,11 +73,6 @@ buttons.addEventListener("click", (event) => {
       rightNum = null;
     }
     curOperator = event.target.textContent;
-  } else if (event.target.id === "clear") {
-    leftNum = 0;
-    rightNum = curOperator = null;
-    display.textContent = 0;
-    evalOp = false;
   } else if (event.target.id === "evaluate") {
     if (rightNum !== null) {
       display.textContent = operate(
@@ -88,5 +85,10 @@ buttons.addEventListener("click", (event) => {
     curOperator = null;
     leftNum = display.textContent;
     evalOp = true;
+  } else if (event.target.id === "clear") {
+    leftNum = 0;
+    rightNum = curOperator = null;
+    display.textContent = 0;
+    evalOp = false;
   }
 });
