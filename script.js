@@ -67,22 +67,24 @@ buttons.addEventListener("click", (event) => {
     }
   } else if (event.target.className === "operator") {
     if (rightNum !== null) {
-      display.textContent = operate(
-        parseFloat(leftNum),
-        curOperator,
-        parseFloat(rightNum)
-      );
+      display.textContent =
+        Math.round(
+          (operate(parseFloat(leftNum), curOperator, parseFloat(rightNum)) +
+            Number.EPSILON) *
+            100
+        ) / 100;
       leftNum = display.textContent;
       rightNum = null;
     }
     curOperator = event.target.textContent;
   } else if (event.target.id === "evaluate") {
     if (rightNum !== null) {
-      display.textContent = operate(
-        parseFloat(leftNum),
-        curOperator,
-        parseFloat(rightNum)
-      );
+      display.textContent =
+        Math.round(
+          (operate(parseFloat(leftNum), curOperator, parseFloat(rightNum)) +
+            Number.EPSILON) *
+            100
+        ) / 100;
       rightNum = null;
     }
     curOperator = null;
