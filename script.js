@@ -133,13 +133,40 @@ const NUMBER_KEYS = new Map()
   .set("9", "nine")
   .set("0", "zero");
 
+const keyPressed = {};
+
 document.addEventListener("keydown", (event) => {
-  const keyName = event.key;
-  if (NUMBER_KEYS.has(keyName)) {
-    document.querySelector(`#${NUMBER_KEYS.get(keyName)}`).click();
-  } else if (keyName === "enter") {
-    document.querySelector("#evaluate").click();
-  } else if (keyName === ".") {
-    document.querySelector("#decimal").click();
+  if (!event.repeat) {
+    keyPressed[event.key] = true;
   }
+  switch (true) {
+    case NUMBER_KEYS.has(event.key):
+      document.querySelector(`#${NUMBER_KEYS.get(event.key)}`).click();
+      break;
+    case event.key === "Enter":
+      document.querySelector("#evaluate").click();
+      break;
+    case event.key === ".":
+      document.querySelector("#decimal").click();
+      break;
+    case event.key === "*":
+      document.querySelector("#multiply").click();
+      break;
+    case event.key === "-":
+      document.querySelector("#subtract").click();
+      break;
+    case event.key === "+":
+      document.querySelector("#add").click();
+      break;
+    case event.key === "/":
+      document.querySelector("#divide").click();
+      break;
+    case event.key === "Backspace" && keyPressed["Shift"]:
+      document.querySelector("#clear").click();
+      break;
+  }
+});
+
+document.addEventListener("keyup", (event) => {
+  if (!event.repeat) delete keyPressed[event.key];
 });
