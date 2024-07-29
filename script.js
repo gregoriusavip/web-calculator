@@ -136,6 +136,6 @@ const NUMBER_KEYS = new Map()
 document.addEventListener("keydown", (event) => {
   const keyName = event.key;
   if (NUMBER_KEYS.has(keyName)) {
-    console.log(document.querySelector(`#${NUMBER_KEYS.get(keyName)}`).click());
+    document.querySelector(`#${NUMBER_KEYS.get(keyName)}`).click();
   }
 });
