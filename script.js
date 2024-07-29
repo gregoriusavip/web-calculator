@@ -137,5 +137,9 @@ document.addEventListener("keydown", (event) => {
   const keyName = event.key;
   if (NUMBER_KEYS.has(keyName)) {
     document.querySelector(`#${NUMBER_KEYS.get(keyName)}`).click();
+  } else if (keyName === "enter") {
+    document.querySelector("#evaluate").click();
+  } else if (keyName === ".") {
+    document.querySelector("#decimal").click();
   }
 });
