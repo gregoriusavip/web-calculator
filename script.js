@@ -43,57 +43,73 @@ function operate(leftNum, operator, rightNum) {
 const display = document.querySelector("#display");
 const buttons = document.querySelector("#buttons");
 
-buttons.addEventListener("click", (event) => {
-  if (event.target.className === "number") {
-    if (event.target.textContent === "0" && display.textContent === "0") {
-      if (curOperator !== null) {
-        rightNum = display.textContent;
-      }
-      return;
-    }
-    if (display.textContent === "0" || evalOp === true) {
-      display.textContent = event.target.textContent;
-      evalOp = false;
-    } else {
-      display.textContent += event.target.textContent;
-    }
-    if (curOperator === null) {
-      leftNum = display.textContent;
-    } else {
-      if (rightNum === null) {
-        display.textContent = event.target.textContent;
-      }
+function handleNumberEvent(target) {
+  if (target.textContent === "0" && display.textContent === "0") {
+    if (curOperator !== null) {
       rightNum = display.textContent;
     }
-  } else if (event.target.className === "operator") {
-    if (rightNum !== null) {
-      display.textContent =
-        Math.round(
-          (operate(parseFloat(leftNum), curOperator, parseFloat(rightNum)) +
-            Number.EPSILON) *
-            100
-        ) / 100;
-      leftNum = display.textContent;
-      rightNum = null;
-    }
-    curOperator = event.target.textContent;
-  } else if (event.target.id === "evaluate") {
-    if (rightNum !== null) {
-      display.textContent =
-        Math.round(
-          (operate(parseFloat(leftNum), curOperator, parseFloat(rightNum)) +
-            Number.EPSILON) *
-            100
-        ) / 100;
-      rightNum = null;
-    }
-    curOperator = null;
-    leftNum = display.textContent;
-    evalOp = true;
-  } else if (event.target.id === "clear") {
-    leftNum = 0;
-    rightNum = curOperator = null;
-    display.textContent = "0";
+    return;
+  }
+  if (display.textContent === "0" || evalOp === true) {
+    display.textContent = target.textContent;
     evalOp = false;
+  } else {
+    display.textContent += target.textContent;
+  }
+  if (curOperator === null) {
+    leftNum = display.textContent;
+  } else {
+    if (rightNum === null) {
+      display.textContent = target.textContent;
+    }
+    rightNum = display.textContent;
+  }
+}
+
+function handleOperatorEvent(target) {
+  if (rightNum !== null) {
+    display.textContent =
+      Math.round(
+        (operate(parseFloat(leftNum), curOperator, parseFloat(rightNum)) +
+          Number.EPSILON) *
+          100
+      ) / 100;
+    leftNum = display.textContent;
+    rightNum = null;
+  }
+  curOperator = target.textContent;
+}
+
+function handleEvaluateEvent() {
+  if (rightNum !== null) {
+    display.textContent =
+      Math.round(
+        (operate(parseFloat(leftNum), curOperator, parseFloat(rightNum)) +
+          Number.EPSILON) *
+          100
+      ) / 100;
+    rightNum = null;
+  }
+  curOperator = null;
+  leftNum = display.textContent;
+  evalOp = true;
+}
+
+function handleClearEvent() {
+  leftNum = 0;
+  rightNum = curOperator = null;
+  display.textContent = "0";
+  evalOp = false;
+}
+
+buttons.addEventListener("click", (event) => {
+  if (event.target.className === "number") {
+    handleNumberEvent(event.target);
+  } else if (event.target.className === "operator") {
+    handleOperatorEvent(event.target);
+  } else if (event.target.id === "evaluate") {
+    handleEvaluateEvent();
+  } else if (event.target.id === "clear") {
+    handleClearEvent();
   }
 });
