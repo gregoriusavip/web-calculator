@@ -23,6 +23,8 @@ leftNum = 0; // default and initial value is 0.
 
 let evalOp = false; // default and initial value is false
 
+const decimalButton = document.querySelector("#decimal");
+
 const OPERATORS = new Map()
   .set("+", add)
   .set("-", subtract)
@@ -68,14 +70,7 @@ function handleNumberEvent(target) {
 
 function handleOperatorEvent(target) {
   if (rightNum !== null) {
-    display.textContent =
-      Math.round(
-        (operate(parseFloat(leftNum), curOperator, parseFloat(rightNum)) +
-          Number.EPSILON) *
-          100
-      ) / 100;
-    leftNum = display.textContent;
-    rightNum = null;
+    handleEvaluateEvent();
   }
   curOperator = target.textContent;
 }
@@ -95,6 +90,11 @@ function handleEvaluateEvent() {
   evalOp = true;
 }
 
+function handleDecimalEvent() {
+  display.textContent += ".";
+  decimalButton.disabled = true;
+}
+
 function handleClearEvent() {
   leftNum = 0;
   rightNum = curOperator = null;
@@ -105,11 +105,18 @@ function handleClearEvent() {
 buttons.addEventListener("click", (event) => {
   if (event.target.className === "number") {
     handleNumberEvent(event.target);
+  } else if (event.target.id === "decimal") {
+    handleDecimalEvent();
   } else if (event.target.className === "operator") {
     handleOperatorEvent(event.target);
   } else if (event.target.id === "evaluate") {
     handleEvaluateEvent();
   } else if (event.target.id === "clear") {
     handleClearEvent();
+  }
+  if (display.textContent.includes(".")) {
+    decimalButton.disabled = true;
+  } else {
+    decimalButton.disabled = false;
   }
 });
