@@ -120,3 +120,22 @@ buttons.addEventListener("click", (event) => {
     decimalButton.disabled = false;
   }
 });
+
+const NUMBER_KEYS = new Map()
+  .set("1", "one")
+  .set("2", "two")
+  .set("3", "three")
+  .set("4", "four")
+  .set("5", "five")
+  .set("6", "six")
+  .set("7", "seven")
+  .set("8", "eight")
+  .set("9", "nine")
+  .set("0", "zero");
+
+document.addEventListener("keydown", (event) => {
+  const keyName = event.key;
+  if (NUMBER_KEYS.has(keyName)) {
+    console.log(document.querySelector(`#${NUMBER_KEYS.get(keyName)}`).click());
+  }
+});
