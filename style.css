@@ -28,6 +28,7 @@ body {
   margin: 3px;
   font-size: x-large;
   padding: 0 4px 8px 0;
+  overflow: hidden;
 }
 
 #buttons {
