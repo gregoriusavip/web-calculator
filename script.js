@@ -102,6 +102,20 @@ function handleClearEvent() {
   evalOp = false;
 }
 
+function handleBackspaceEvent() {
+  const curText = display.textContent;
+  if (curText.length > 1) {
+    display.textContent = curText.substring(0, curText.length - 1);
+  } else {
+    display.textContent = 0;
+  }
+  if (curOperator === null) {
+    leftNum = display.textContent;
+  } else {
+    rightNum = display.textContent;
+  }
+}
+
 buttons.addEventListener("click", (event) => {
   if (event.target.className === "number") {
     handleNumberEvent(event.target);
@@ -111,6 +125,8 @@ buttons.addEventListener("click", (event) => {
     handleOperatorEvent(event.target);
   } else if (event.target.id === "evaluate") {
     handleEvaluateEvent();
+  } else if (event.target.id === "undo") {
+    handleBackspaceEvent();
   } else if (event.target.id === "clear") {
     handleClearEvent();
   }
@@ -163,6 +179,9 @@ document.addEventListener("keydown", (event) => {
       break;
     case event.key === "Backspace" && keyPressed["Shift"]:
       document.querySelector("#clear").click();
+      break;
+    case event.key === "Backspace":
+      document.querySelector("#undo").click();
       break;
   }
 });
