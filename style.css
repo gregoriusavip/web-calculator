@@ -1,7 +1,7 @@
 * {
   margin: 0px;
   padding: 0px;
-  font-family: Verdana, Tahoma, sans-serif;
+  font-family: "Oswald", sans-serif;
 }
 
 body {
@@ -15,43 +15,56 @@ body {
   display: flex;
   flex-direction: column;
   width: 250px;
-  gap: 8px;
-  border-style: solid;
 }
 
 #display {
-  height: 64px;
+  height: 81px;
   display: flex;
   justify-content: flex-end;
   align-items: end;
-  border: solid;
-  margin: 3px;
-  font-size: x-large;
-  padding: 0 4px 8px 0;
+  font-size: 26px;
+  color: #ececee;
+  padding: 0 4px 16px 0;
   overflow: hidden;
+  background-color: #001d3d;
+  border-radius: 15px 15px 0 0;
 }
 
 #buttons {
   display: flex;
   flex-direction: column;
-  margin: 3px;
-  gap: 4px;
 }
 
 .row {
   display: flex;
-  gap: 4px;
 }
 
 .row > button {
   width: 100%;
-  height: 48px;
+  height: 62px;
   flex: auto;
+  border: 1px outset grey;
+  background-color: #370617;
+  font-size: 20px;
+  color: white;
 }
 
 #divide,
 #evaluate,
 #decimal {
-  min-width: 58px;
-  max-width: 58px;
+  min-width: 62.5px;
+  max-width: 62.5px;
+}
+
+#zero {
+  border-bottom-left-radius: 15px;
+}
+
+#evaluate {
+  border-bottom-right-radius: 15px;
+}
+
+#evaluate,
+button.operator {
+  background-color: black;
 }
